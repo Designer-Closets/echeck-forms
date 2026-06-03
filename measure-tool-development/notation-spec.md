@@ -73,20 +73,28 @@ Example: `72RI,D4,H108,27.5,D2,63,D2,104`
 - `D2,63` → 90° turn, width 63" (height blank ⇒ still 108")
 - `D2,104` → 90° turn, width 104" (still 108")
 
-Token prefixes (order within a wall: `D` then optional `H` then width):
+Token prefixes (order within a wall: `D` then height/slope then width):
 - `D<sector>` = direction / turn (45° sectors)
-- `H<height>` = wall height. **Sticky:** carries forward to following walls
-  until a new `H` is given. Omit it whenever the height is unchanged.
+- `H<height>` = flat wall height. **Sticky:** carries forward until changed.
+- `/<height>` = **rising** wall to end-height `<height>`
+- `\<height>` = **dropping** wall to end-height `<height>`
 - bare number = wall width
+
+Vaulted / raked walls:
+- `/` rises, `\` drops; the number is the **end** height of that wall.
+- The **start height is inherited** from the previous wall's end height
+  (so a vault rising to a ridge and dropping back just chains `/…` then `\…`).
+- Area of a sloped wall = (startH + endH) / 2 × width.
+
+Example with a vault: `D4,H108,27.5,/142,65,\108,65`
+= flat 108"×27½", then rise 108→142 over 65" (ridge at 142"), then drop
+142→108 over 65".
 
 Rules:
 - Leading number = door **height** (elevation/3D, not the plan footprint). The
   door **width** comes from the opening geometry (the leftover at the closing
   connection point = door + moldings, default molding 2.25").
-- Wall area = height × width.
-- **Raked / vaulted wall** (rises to / drops from a ridge beam) has two heights:
-  `H<startHeight>H<endHeight>` before the width (e.g. `D4,H108H140,27.5`);
-  area = (startH + endH)/2 × width. *(format pending confirmation)*
+- Flat wall area = height × width.
 
 ## Door codes (prefix the run)
 
