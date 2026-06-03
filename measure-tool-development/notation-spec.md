@@ -1,160 +1,175 @@
-# Measure Tool — Room Notation Spec (working draft)
+# Measure Tool — Room Notation Spec
 
-A room is recorded as a single string of alternating **direction tokens** and
-**lengths**:
+A room/run is recorded as one comma-separated string, read **clockwise from the
+door you entered**. The string is:
 
-    D<n> L1  D<n> L2  D<n> L3 ...
+    [trim prefix], <door>, <wall>, <wall>, <wall>, ...
 
-- **`D`** = "Direction"; **`n`** = number of 45° sectors (so `D2` = 90°,
-  `D4` = 180°, `D3` = 135°).
-- The first `D<n>` sets Wall 1's start angle; each following `D<n>` is the angle
-  to the next wall.
+Example (full):
 
-Example: `D4 27.5 D2 64`  (L-shape: 27½" straight left, 90° turn, 64").
+    B5.5,QR,84RI,H109,27.5,D2,+115,27.5,D2,-109,27,D2,27.5
 
-> Older drafts used a `-n-` dash form (`-4- 27.5 -2- 64`); `D<n>` replaces it.
+Read as: 5½" baseboard + quarter round on every wall; an 84"-tall right-hinge
+swing-in door; then walls walked clockwise.
 
-## Rules
+---
+
+## 1. Core rules
 
 1. **Traversal is always clockwise.**
-2. **Wall 1** is the first wall to the **left** of the entry door used. With
-   multiple doors, the one entered through is the start (point A).
-3. **Lengths** are in inches (decimals or fractions, e.g. `27.5` / `27 1/2`).
-4. **Sectors** = number of 45° steps for the angle. 360° / 45° = 8 sectors.
+2. **Wall 1** is the first wall to the **left** of the entry door used (if several
+   doors, the one you came through). Point **A** = the door/start.
+3. Measurements are in **inches** (decimals or fractions: `27.5` or `27 1/2`).
+4. Walls run only along **45° multiples** (8 compass directions). Angles are given
+   as 45° "sectors" (see §3).
+5. Because traversal is clockwise and Wall 1's start is fixed, each angle's
+   **sector count alone** fully determines the geometry — no left/right needed.
+6. **Closing & the doorway:** walking the walls returns near point A; the leftover
+   gap back to A is the **doorway**. The door **width** = that leftover (minus
+   moldings); see §6.
 
-### Sector values
+---
 
-| Sector | Degrees | Meaning (as interior angle, clockwise) | Allowed |
+## 2. Trim prefix (optional, room-wide)
+
+Comes first, before the door:
+
+- `B<height>` — baseboard of that height on **every** wall (thickness assumed ¾").
+- `QR` — quarter round present (always ¾"×¾") between baseboard and floor.
+  Omit `QR` = no quarter round.
+
+`B`+number = baseboard (here, room prefix); `BL`/`BR` bifold lives in the door
+slot, so position disambiguates.
+
+---
+
+## 3. Direction — `D<sector>` (45° sectors)
+
+`D` = direction/turn; the digit = number of 45° steps. 360° / 45° = 8 sectors.
+
+| Sector | Degrees | Meaning (interior angle, clockwise) | Allowed |
 |:---:|:---:|:---|:---:|
-| 1 | 45  | —                                  | NO |
-| 2 | 90  | square corner (turn right 90°)     | yes |
-| 3 | 135 | 45° angled wall (turn right 45°)   | yes |
-| 4 | 180 | wall continues straight            | yes |
+| 1 | 45  | —                                        | NO |
+| 2 | 90  | square corner (turn right 90°)           | yes |
+| 3 | 135 | 45° angled wall (turn right 45°)         | yes |
+| 4 | 180 | wall continues straight                  | yes |
 | 5 | 225 | 45° angled wall (turn left 45°, concave) | yes |
 | 6 | 270 | square notch (turn left 90°, concave)    | yes |
-| 7 | 315 | —                                  | NO |
-| 8 | 360 | full turn / close                  | (special) |
+| 7 | 315 | —                                        | NO |
+| 8 | 360 | full turn / close                        | special |
 
-Sectors **1 and 7 never occur**.
+- Sectors **1 and 7 never occur**.
+- The **first** `D` sets Wall 1's start angle off the entry wall; `D4` (180°) =
+  straight/continuous from the door molding (the default if no `D` is given).
+- A wall with **no `D` continues straight** (collinear) — handy when one straight
+  wall is split into segments only because its ceiling height changes.
 
-### Leading sector (start angle of Wall 1)
+---
 
-The optional first sector aims Wall 1 relative to the **entry wall**, measured the
-same way (interior angle from the entry wall on the door's right side, swinging
-up into the room):
+## 4. Wall dimensions — height, slope, width
 
-- `-4-` (180°) = Wall 1 runs **straight/continuous** from the end of the door
-  molding (flat left). This is the default when no leading sector is given.
-- `-3-` (135°) = Wall 1 leaves the door as a 45° diagonal up into the room.
-- etc.
+Order within a wall: `D<sector>` (optional) then height/slope (optional) then
+width.
 
-### Corners between walls
+- `H<height>` — flat wall height. **Sticky:** carries forward to following walls
+  until changed.
+- `+<height>` — wall **rises** to that **end** height. (replaces `/`)
+- `-<height>` — wall **drops** to that **end** height. (replaces `\`)
+  Heights are always positive, so `-110` is unambiguous = drop to 110.
+- bare number — wall **width**.
+- A **bare width** with no height/slope = a **level** wall at the current
+  inherited height.
 
-Each sector between two lengths is the angle the next wall forms with the current
-one. Because traversal is always clockwise and Wall 1's start is fixed, the
-sector count alone fully determines the geometry (no separate left/right needed).
+**Vaulted / raked walls:** the **start height is inherited** from the previous
+wall's end height, so a vault just chains `+…` up to the ridge then `-…` back
+down. Sloped-wall area = (startH + endH) / 2 × width. Flat area = height × width.
 
-### Closing & the doorway
+Example: `D4,H108,27.5,+142,65,-108,65` = flat 108"×27½", rise 108→142 over 65"
+(ridge 142"), drop 142→108 over 65".
 
-Walking the lengths/turns from the door eventually returns near the start; the
-remaining gap back to point A is the **doorway** in the entry wall.
+---
 
-## Room trim prefix (baseboard + quarter round)
+## 5. Door codes
 
-Before the door code, an optional room-wide trim prefix:
+The door follows the trim prefix. A **leading number = door HEIGHT** (for
+elevation/3D, not the plan footprint); the letters are the type/hand/swing.
 
-- `B<height>` = baseboard of that height on **every** wall (thickness assumed ¾").
-- `QR` = quarter round present (always ¾"×¾") between baseboard and floor;
-  omit `QR` = no quarter round.
-
-Example prefix: `B5.5,QR,84RI,...` = 5½" baseboard + quarter round, then an 84"
-right-in door. (`B`+number = baseboard here; `BL`/`BR` bifold lives in the door
-slot, so position disambiguates.)
-
-## String format (comma-separated)
-
-Items are separated by commas for readability:
-
-    <doorHeight><doorCode>, D<sector>,<height>,<width>, D<sector>,<height>,<width>, ...
-
-Example: `72RI,D4,H108,27.5,D2,63,D2,104`
-- `72RI` → 72"-tall door, Right hinge, swing In
-- `D4`   → direction 180° (straight from door molding)
-- `H108` → wall height 108"
-- `27.5` → wall width 27½"
-- `D2,63` → 90° turn, width 63" (height blank ⇒ still 108")
-- `D2,104` → 90° turn, width 104" (still 108")
-
-Token prefixes (order within a wall: `D` then height/slope then width):
-- `D<sector>` = direction / turn (45° sectors)
-- `H<height>` = flat wall height. **Sticky:** carries forward until changed.
-- `+<height>` = **rising** wall to end-height `<height>`  (easier to type than `/`)
-- `-<height>` = **dropping** wall to end-height `<height>`  (easier to type than `\`)
-- bare number = wall width
-
-Vaulted / raked walls:
-- `+` rises, `-` drops; the number is the **end** height of that wall.
-  (Heights are always positive, so `-110` is unambiguous = drop to 110.)
-- The **start height is inherited** from the previous wall's end height
-  (so a vault rising to a ridge and dropping back just chains `+…` then `-…`).
-- Slopes chain: consecutive `+…` keep climbing; the converse with `-…` descends.
-- A **bare width** (no `H`, `+`, or `-`) = a **level** wall at the current
-  inherited height (e.g. trailing `…,+114,27,27` ends level at 114").
-- Area of a sloped wall = (startH + endH) / 2 × width.
-
-Direction: a wall with **no `D` token continues straight** (collinear with the
-previous wall) — useful when a single straight wall is split into segments only
-because its ceiling height changes.
-
-Example with a vault: `D4,H108,27.5,+142,65,-108,65`
-= flat 108"×27½", then rise 108→142 over 65" (ridge at 142"), then drop
-142→108 over 65".
-
-Rules:
-- Leading number = door **height** (elevation/3D, not the plan footprint). The
-  door **width** comes from the opening geometry (the leftover at the closing
-  connection point = door + moldings, default molding 2.25").
-- Flat wall area = height × width.
-
-## Door codes (prefix the run)
-
-The string starts with a door-type code describing the entry:
-
-All codes are **2 characters**. The leading letter selects the type:
+Single doors — all 2 characters:
 
 | Type | Codes | Meaning |
 |---|---|---|
-| Hinged (swing) | `LI LO RI RO` | 1st = hinge side entering room (`L`/`R`); 2nd = swing `I`n/`O`ut. `H` is dropped — hinge is assumed. |
-| Bifold | `BL BR` | |
-| Pocket | `PL PR` | |
+| Hinged (swing) | `LI LO RI RO` | hinge side entering room (`L`/`R`) + swing `I`n/`O`ut (`H` dropped, hinge assumed) |
+| Bifold | `BL BR` | stack/fold side left or right |
+| Pocket | `PL PR` | slides into wall, left or right |
 | Sliding | `S1 S2 …` | digit = number of panels |
-| Archway / open | `A0` | no door, no swing (`0` = zero panels) |
-| Barn door | `XL XR` | surface-mounted on a track (`X`); parks/slides left or right |
+| Archway / open | `A0` | no door, no swing |
+| Barn door | `XL XR` | surface track (`X`), parks left or right |
 
-- A code starting with `L`/`R` = hinged; `B` = bifold; `P` = pocket; `S` = sliding.
-- Hand/swing reference: standing at the door, facing into the room.
-- Door *width* is still derived from the opening geometry (opening − moldings);
-  the code adds type/hand/swing.
-
-Example: `LI D4 27.5 D2 64`
-
-### Double / multi-panel doors
-
-A double door = two single codes joined. Sliding uses a panel count.
+Double / multi-panel — two single codes joined:
 
 | Kind | Code | Meaning |
 |---|---|---|
-| Double swing in | `LIRI` | left leaf hinge-left swing-in, right leaf hinge-right swing-in |
+| Double swing in | `LIRI` | both leaves swing in |
 | Double swing out | `LORO` | both leaves swing out |
-| Double bifold | `BLBR` | bifold-left + bifold-right; bifolds always fold **outward** |
-| Double pocket | `PLPR` | pocket sliding into the wall on **both** sides |
-| Sliding (n panels) | `S1 S2 S3 …` | n bypass panels, slide both ways, overlapping |
+| Double bifold | `BLBR` | bifold L + bifold R (fold outward) |
+| Double pocket | `PLPR` | pocket into wall both sides |
+| Sliding (n panels) | `S1 S2 S3 …` | n bypass panels |
 
-- Sliding: with `n` panels, **1/n of the opening is always blocked** (bypass
-  overlap); usable opening = (n−1)/n.
+- Hand/swing reference: standing at the door, facing into the room.
+- Sliding: with `n` panels, **1/n of the opening is always blocked** (overlap);
+  usable opening = (n−1)/n.
 
-## Worked examples (in repo)
+---
 
-- `example-two-walls.svg` — `-4- 27.5 -2- 67`
-- `example-room.svg`      — `27.5 -2- 64 -2- 142 -2- 63.78 -2- 83` (rectangle)
-- `leading-sector.svg`    — `-3- 27.5` (angled Wall 1 start)
+## 6. Door width
+
+The leading door number is **height**. Door **width** is derived from the plan:
+the leftover gap at the closing connection point = door + moldings (default
+molding **2.25"** each side).
+
+---
+
+## 7. Worked example, fully decoded
+
+`B5.5,QR,84RI,H109,27.5,D2,+115,27.5,D2,-109,27,D2,27.5`
+
+| Part | Token | Meaning |
+|---|---|---|
+| trim | `B5.5` | 5½" baseboard, all walls |
+| trim | `QR` | quarter round, all walls |
+| door | `84RI` | 84"-tall, right hinge, swing in |
+| wall 1 | `H109,27.5` | straight (default), flat 109", 27½" wide |
+| wall 2 | `D2,+115,27.5` | 90° turn, rise 109→115, 27½" wide |
+| wall 3 | `D2,-109,27` | 90° turn, drop 115→109, 27" wide |
+| wall 4 | `D2,27.5` | 90° turn, level 109", 27½" wide |
+
+(Numbers here are illustrative — they don't leave a realistic door width.)
+
+---
+
+## 8. Open items / next session
+
+- **Slope token with no width** (e.g. `+114` immediately before `-110`): treat as
+  a dropped width (typo) or as a zero-width ridge apex? — TBD.
+- Bifold/pocket `L`/`R` exact meaning (fold/stack side vs slide-into side) — assumed
+  but unconfirmed.
+- French doors = treat as double swing? Mixed-swing double (`LIRO`) allowed?
+- **Build:** a parser + live drawing tool (web app, PC + Android) that renders any
+  string per this spec.
+
+---
+
+## 9. Reference drawings (in this folder)
+
+| File | Shows |
+|---|---|
+| `door-codes.svg` | hinged `LI LO RI RO` |
+| `double-door-codes.svg` | `LIRI LORO BLBR S2` |
+| `archway-barn-codes.svg` | `A0 XL XR` |
+| `example-L-Dnotation.svg` | `D4 27.5 D2 64` (L-shape) |
+| `example-room.svg` | rectangle room |
+| `example-niche.svg` | open run with door+moldings |
+| `wall-height-area.svg` | flat vs raked wall area |
+| `vaulted-wall.svg` | vault to a ridge (`+ / -`) |
+| `vault-stepped.svg` | stepped rising ceiling |
+| `baseboard-qr.svg` | baseboard + quarter round detail |
