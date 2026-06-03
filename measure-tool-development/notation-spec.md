@@ -79,6 +79,20 @@ All codes are **2 characters**. The leading letter selects the type:
 
 Example: `LI D4 27.5 D2 64`
 
+### Double / multi-panel doors
+
+A double door = two single codes joined. Sliding uses a panel count.
+
+| Kind | Code | Meaning |
+|---|---|---|
+| Double swing in | `LIRI` | left leaf hinge-left swing-in, right leaf hinge-right swing-in |
+| Double swing out | `LORO` | both leaves swing out |
+| Double bifold | `BLBR` | bifold-left + bifold-right; bifolds always fold **outward** |
+| Sliding (n panels) | `S1 S2 S3 …` | n bypass panels, slide both ways, overlapping |
+
+- Sliding: with `n` panels, **1/n of the opening is always blocked** (bypass
+  overlap); usable opening = (n−1)/n.
+
 ## Worked examples (in repo)
 
 - `example-two-walls.svg` — `-4- 27.5 -2- 67`

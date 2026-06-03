@@ -1,0 +1,45 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="680" height="560" viewBox="0 0 680 560" font-family="Arial, sans-serif">
+  <rect x="0" y="0" width="680" height="560" fill="#ffffff"/>
+  <text x="340" y="30" font-size="18" font-weight="bold" text-anchor="middle">Double / multi-panel door codes</text>
+  <text x="340" y="52" font-size="12" fill="#2563eb" text-anchor="middle">ROOM (inside) is the top side of each opening</text>
+
+  <!-- ===== LIRI : double swing IN (row1 left, cx180 wy170) ===== -->
+  <line x1="50" y1="170" x2="110" y2="170" stroke="#111827" stroke-width="5"/>
+  <line x1="250" y1="170" x2="310" y2="170" stroke="#111827" stroke-width="5"/>
+  <line x1="110" y1="170" x2="110" y2="100" stroke="#dc2626" stroke-width="3"/>
+  <path d="M110,100 A70,70 0 0,1 180,170" fill="none" stroke="#dc2626" stroke-width="1.5" stroke-dasharray="5 4"/>
+  <line x1="250" y1="170" x2="250" y2="100" stroke="#dc2626" stroke-width="3"/>
+  <path d="M250,100 A70,70 0 0,0 180,170" fill="none" stroke="#dc2626" stroke-width="1.5" stroke-dasharray="5 4"/>
+  <text x="180" y="210" font-size="15" font-weight="bold" text-anchor="middle">LIRI</text>
+  <text x="180" y="228" font-size="11" fill="#6b7280" text-anchor="middle">double swing — both IN</text>
+
+  <!-- ===== LORO : double swing OUT (row1 right, cx500 wy170) ===== -->
+  <line x1="370" y1="170" x2="430" y2="170" stroke="#111827" stroke-width="5"/>
+  <line x1="570" y1="170" x2="630" y2="170" stroke="#111827" stroke-width="5"/>
+  <line x1="430" y1="170" x2="430" y2="240" stroke="#dc2626" stroke-width="3"/>
+  <path d="M430,240 A70,70 0 0,0 500,170" fill="none" stroke="#dc2626" stroke-width="1.5" stroke-dasharray="5 4"/>
+  <line x1="570" y1="170" x2="570" y2="240" stroke="#dc2626" stroke-width="3"/>
+  <path d="M570,240 A70,70 0 0,1 500,170" fill="none" stroke="#dc2626" stroke-width="1.5" stroke-dasharray="5 4"/>
+  <text x="500" y="135" font-size="15" font-weight="bold" text-anchor="middle">LORO</text>
+  <text x="500" y="153" font-size="11" fill="#6b7280" text-anchor="middle">double swing — both OUT</text>
+
+  <!-- ===== BLBR : double bifold (row2 left, cx180 wy400) ===== -->
+  <line x1="50" y1="400" x2="110" y2="400" stroke="#111827" stroke-width="5"/>
+  <line x1="250" y1="400" x2="310" y2="400" stroke="#111827" stroke-width="5"/>
+  <polyline points="110,400 140,448 180,400" fill="none" stroke="#dc2626" stroke-width="3"/>
+  <polyline points="250,400 220,448 180,400" fill="none" stroke="#dc2626" stroke-width="3"/>
+  <text x="180" y="478" font-size="15" font-weight="bold" text-anchor="middle">BLBR</text>
+  <text x="180" y="496" font-size="11" fill="#6b7280" text-anchor="middle">bifold L + bifold R (fold outward)</text>
+
+  <!-- ===== S2 : two bypass sliders (row2 right, cx500 wy400) ===== -->
+  <line x1="370" y1="400" x2="430" y2="400" stroke="#111827" stroke-width="5"/>
+  <line x1="570" y1="400" x2="630" y2="400" stroke="#111827" stroke-width="5"/>
+  <line x1="430" y1="392" x2="512" y2="392" stroke="#dc2626" stroke-width="5"/>
+  <line x1="488" y1="408" x2="570" y2="408" stroke="#9333ea" stroke-width="5"/>
+  <line x1="450" y1="375" x2="490" y2="375" stroke="#dc2626" stroke-width="1"/><polygon points="490,375 484,372 484,378" fill="#dc2626"/>
+  <line x1="550" y1="425" x2="510" y2="425" stroke="#9333ea" stroke-width="1"/><polygon points="510,425 516,422 516,428" fill="#9333ea"/>
+  <text x="500" y="478" font-size="15" font-weight="bold" text-anchor="middle">S2</text>
+  <text x="500" y="496" font-size="11" fill="#6b7280" text-anchor="middle">2 bypass panels — ½ always blocked</text>
+
+  <text x="340" y="535" font-size="12" fill="#374151" text-anchor="middle" font-style="italic">A double door = two single codes joined (e.g. LI + RI = LIRI)</text>
+</svg>
