@@ -76,6 +76,10 @@ Tokenizing rules: a leading number = door width; the following letter group =
 door code; then each `D` + single digit (the sector) is followed by a number
 (the wall length) until the next `D`.
 
+The leading number is the **clear door width**; the rough opening =
+door width + 2 × molding (default molding 2.25"). `72RID427.5` reads as
+"72" door, right swing, in; direction 4 (×45° = 180°), 27½"."
+
 ## Door codes (prefix the run)
 
 The string starts with a door-type code describing the entry:
