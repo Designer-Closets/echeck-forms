@@ -1,10 +1,18 @@
 # Measure Tool — Room Notation Spec (working draft)
 
-A room is recorded as a single string of alternating **lengths** and **sectors**:
+A room is recorded as a single string of alternating **direction tokens** and
+**lengths**:
 
-    [leadingSector] L1 - sector - L2 - sector - L3 ...
+    D<n> L1  D<n> L2  D<n> L3 ...
 
-Example: `-4- 27.5 -2- 67`
+- **`D`** = "Direction"; **`n`** = number of 45° sectors (so `D2` = 90°,
+  `D4` = 180°, `D3` = 135°).
+- The first `D<n>` sets Wall 1's start angle; each following `D<n>` is the angle
+  to the next wall.
+
+Example: `D4 27.5 D2 64`  (L-shape: 27½" straight left, 90° turn, 64").
+
+> Older drafts used a `-n-` dash form (`-4- 27.5 -2- 64`); `D<n>` replaces it.
 
 ## Rules
 
