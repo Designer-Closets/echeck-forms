@@ -84,7 +84,14 @@ Vaulted / raked walls:
 - `/` rises, `\` drops; the number is the **end** height of that wall.
 - The **start height is inherited** from the previous wall's end height
   (so a vault rising to a ridge and dropping back just chains `/…` then `\…`).
+- Slopes chain: consecutive `/…` keep climbing; the converse with `\…` descends.
+- A **bare width** (no `H`, no `/`, no `\`) = a **level** wall at the current
+  inherited height (e.g. trailing `…,/114,27,27` ends level at 114").
 - Area of a sloped wall = (startH + endH) / 2 × width.
+
+Direction: a wall with **no `D` token continues straight** (collinear with the
+previous wall) — useful when a single straight wall is split into segments only
+because its ceiling height changes.
 
 Example with a vault: `D4,H108,27.5,/142,65,\108,65`
 = flat 108"×27½", then rise 108→142 over 65" (ridge at 142"), then drop
