@@ -65,23 +65,28 @@ Items are separated by commas for readability:
 
     <doorHeight><doorCode>, D<sector>,<height>,<width>, D<sector>,<height>,<width>, ...
 
-Example: `72RI,D4,109,27.5`
+Example: `72RI,D4,H108,27.5,D2,63,D2,104`
 - `72RI` → 72"-tall door, Right hinge, swing In
 - `D4`   → direction 180° (straight from door molding)
-- `109`  → wall height 109"
+- `H108` → wall height 108"
 - `27.5` → wall width 27½"
+- `D2,63` → 90° turn, width 63" (height blank ⇒ still 108")
+- `D2,104` → 90° turn, width 104" (still 108")
+
+Token prefixes (order within a wall: `D` then optional `H` then width):
+- `D<sector>` = direction / turn (45° sectors)
+- `H<height>` = wall height. **Sticky:** carries forward to following walls
+  until a new `H` is given. Omit it whenever the height is unchanged.
+- bare number = wall width
 
 Rules:
 - Leading number = door **height** (elevation/3D, not the plan footprint). The
   door **width** comes from the opening geometry (the leftover at the closing
   connection point = door + moldings, default molding 2.25").
-- Per wall: `D<sector>` then dimensions. **Width is always the last number; the
-  number(s) before it are height(s):**
-  - 2 numbers = flat wall → `height, width` (e.g. `D4,109,27.5`)
-  - 3 numbers = raked/vaulted wall → `startHeight, endHeight, width`
-    (e.g. `D4,109,140,27.5`)
-- Wall area = height × width (flat) or (startH + endH)/2 × width (raked).
-  Raked walls handle vaulted ceilings rising to / dropping from a ridge beam.
+- Wall area = height × width.
+- **Raked / vaulted wall** (rises to / drops from a ridge beam) has two heights:
+  `H<startHeight>H<endHeight>` before the width (e.g. `D4,H108H140,27.5`);
+  area = (startH + endH)/2 × width. *(format pending confirmation)*
 
 ## Door codes (prefix the run)
 
