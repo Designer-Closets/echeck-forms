@@ -67,18 +67,19 @@ tokenizes by pattern:
     <doorWidth><doorCode>  then repeating  D<sector><length>
 
 Example: `72RID427.5`
-- `72`   → door width 72"
+- `72`   → door **height** 72"
 - `RI`   → right hinge, swing in
 - `D4`   → direction 180° (straight from door molding)
 - `27.5` → Wall 1 = 27½"
 
-Tokenizing rules: a leading number = door width; the following letter group =
-door code; then each `D` + single digit (the sector) is followed by a number
+Tokenizing rules: a leading number = door **height**; the following letter group
+= door code; then each `D` + single digit (the sector) is followed by a number
 (the wall length) until the next `D`.
 
-The leading number is the **clear door width**; the rough opening =
-door width + 2 × molding (default molding 2.25"). `72RID427.5` reads as
-"72" door, right swing, in; direction 4 (×45° = 180°), 27½"."
+The leading number is the door **height** (used for elevation/3D, not the plan
+footprint). The door **width** comes from the opening geometry in the plan
+(opening − moldings, default molding 2.25"). `72RID427.5` reads as
+"72"-tall door, right swing, in; direction 4 (×45° = 180°), 27½"."
 
 ## Door codes (prefix the run)
 
