@@ -59,6 +59,25 @@ sector count alone fully determines the geometry (no separate left/right needed)
 Walking the lengths/turns from the door eventually returns near the start; the
 remaining gap back to point A is the **doorway** in the entry wall.
 
+## Door codes (prefix the run)
+
+The string starts with a door-type code describing the entry:
+
+| Type | Letter | Format | Variants |
+|---|---|---|---|
+| Hinged (swing) | `H` | `H` + hand + swing | `HLI HLO HRI HRO` |
+| Bifold | `B` | 2 chars | `BL BR` |
+| Pocket | `P` | 2 chars | `PL PR` |
+| Sliding | `S` | `S` + count | `S1 S2 …` |
+
+- Hand `L`/`R` = hinge side, viewed standing at the door entering the room.
+- Swing `I`/`O` = Inside / Outside — **hinged only**.
+- Sliding digit = number of panels.
+- Door *width* is still derived from the opening geometry (opening − moldings);
+  the code adds type/hand/swing.
+
+Example: `HLI D4 27.5 D2 64`
+
 ## Worked examples (in repo)
 
 - `example-two-walls.svg` — `-4- 27.5 -2- 67`
