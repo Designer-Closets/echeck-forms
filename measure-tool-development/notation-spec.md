@@ -63,20 +63,21 @@ remaining gap back to point A is the **doorway** in the entry wall.
 
 The string starts with a door-type code describing the entry:
 
-| Type | Letter | Format | Variants |
-|---|---|---|---|
-| Hinged (swing) | `H` | `H` + hand + swing | `HLI HLO HRI HRO` |
-| Bifold | `B` | 2 chars | `BL BR` |
-| Pocket | `P` | 2 chars | `PL PR` |
-| Sliding | `S` | `S` + count | `S1 S2 …` |
+All codes are **2 characters**. The leading letter selects the type:
 
-- Hand `L`/`R` = hinge side, viewed standing at the door entering the room.
-- Swing `I`/`O` = Inside / Outside — **hinged only**.
-- Sliding digit = number of panels.
+| Type | Codes | Meaning |
+|---|---|---|
+| Hinged (swing) | `LI LO RI RO` | 1st = hinge side entering room (`L`/`R`); 2nd = swing `I`n/`O`ut. `H` is dropped — hinge is assumed. |
+| Bifold | `BL BR` | |
+| Pocket | `PL PR` | |
+| Sliding | `S1 S2 …` | digit = number of panels |
+
+- A code starting with `L`/`R` = hinged; `B` = bifold; `P` = pocket; `S` = sliding.
+- Hand/swing reference: standing at the door, facing into the room.
 - Door *width* is still derived from the opening geometry (opening − moldings);
   the code adds type/hand/swing.
 
-Example: `HLI D4 27.5 D2 64`
+Example: `LI D4 27.5 D2 64`
 
 ## Worked examples (in repo)
 
