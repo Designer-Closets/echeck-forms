@@ -59,6 +59,18 @@ sector count alone fully determines the geometry (no separate left/right needed)
 Walking the lengths/turns from the door eventually returns near the start; the
 remaining gap back to point A is the **doorway** in the entry wall.
 
+## Room trim prefix (baseboard + quarter round)
+
+Before the door code, an optional room-wide trim prefix:
+
+- `B<height>` = baseboard of that height on **every** wall (thickness assumed ¾").
+- `QR` = quarter round present (always ¾"×¾") between baseboard and floor;
+  omit `QR` = no quarter round.
+
+Example prefix: `B5.5,QR,84RI,...` = 5½" baseboard + quarter round, then an 84"
+right-in door. (`B`+number = baseboard here; `BL`/`BR` bifold lives in the door
+slot, so position disambiguates.)
+
 ## String format (comma-separated)
 
 Items are separated by commas for readability:
