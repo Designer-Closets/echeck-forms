@@ -76,24 +76,25 @@ Example: `72RI,D4,H108,27.5,D2,63,D2,104`
 Token prefixes (order within a wall: `D` then height/slope then width):
 - `D<sector>` = direction / turn (45° sectors)
 - `H<height>` = flat wall height. **Sticky:** carries forward until changed.
-- `/<height>` = **rising** wall to end-height `<height>`
-- `\<height>` = **dropping** wall to end-height `<height>`
+- `+<height>` = **rising** wall to end-height `<height>`  (easier to type than `/`)
+- `-<height>` = **dropping** wall to end-height `<height>`  (easier to type than `\`)
 - bare number = wall width
 
 Vaulted / raked walls:
-- `/` rises, `\` drops; the number is the **end** height of that wall.
+- `+` rises, `-` drops; the number is the **end** height of that wall.
+  (Heights are always positive, so `-110` is unambiguous = drop to 110.)
 - The **start height is inherited** from the previous wall's end height
-  (so a vault rising to a ridge and dropping back just chains `/…` then `\…`).
-- Slopes chain: consecutive `/…` keep climbing; the converse with `\…` descends.
-- A **bare width** (no `H`, no `/`, no `\`) = a **level** wall at the current
-  inherited height (e.g. trailing `…,/114,27,27` ends level at 114").
+  (so a vault rising to a ridge and dropping back just chains `+…` then `-…`).
+- Slopes chain: consecutive `+…` keep climbing; the converse with `-…` descends.
+- A **bare width** (no `H`, `+`, or `-`) = a **level** wall at the current
+  inherited height (e.g. trailing `…,+114,27,27` ends level at 114").
 - Area of a sloped wall = (startH + endH) / 2 × width.
 
 Direction: a wall with **no `D` token continues straight** (collinear with the
 previous wall) — useful when a single straight wall is split into segments only
 because its ceiling height changes.
 
-Example with a vault: `D4,H108,27.5,/142,65,\108,65`
+Example with a vault: `D4,H108,27.5,+142,65,-108,65`
 = flat 108"×27½", then rise 108→142 over 65" (ridge at 142"), then drop
 142→108 over 65".
 
