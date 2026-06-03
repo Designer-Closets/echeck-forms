@@ -71,6 +71,8 @@ All codes are **2 characters**. The leading letter selects the type:
 | Bifold | `BL BR` | |
 | Pocket | `PL PR` | |
 | Sliding | `S1 S2 …` | digit = number of panels |
+| Archway / open | `A0` | no door, no swing (`0` = zero panels) |
+| Barn door | `XL XR` | surface-mounted on a track (`X`); parks/slides left or right |
 
 - A code starting with `L`/`R` = hinged; `B` = bifold; `P` = pocket; `S` = sliding.
 - Hand/swing reference: standing at the door, facing into the room.
