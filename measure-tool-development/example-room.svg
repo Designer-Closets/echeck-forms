@@ -1,0 +1,46 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="700" height="390" viewBox="0 0 700 390" font-family="Arial, sans-serif">
+  <rect x="0" y="0" width="700" height="390" fill="#ffffff"/>
+
+  <!-- Room interior -->
+  <polygon points="60,312 60,60 628,60 628,312" fill="#dbeafe" fill-opacity="0.5" stroke="none"/>
+
+  <!-- Walls (clockwise from door) -->
+  <!-- Wall 1: A(170,312) -> B(60,312)  West 27.5 -->
+  <line x1="170" y1="312" x2="60" y2="312" stroke="#111827" stroke-width="5"/>
+  <!-- Wall 2: B(60,312) -> C(60,60)  North 63 -->
+  <line x1="60" y1="312" x2="60" y2="60" stroke="#111827" stroke-width="5"/>
+  <!-- Wall 3: C(60,60) -> D(628,60)  East 142 -->
+  <line x1="60" y1="60" x2="628" y2="60" stroke="#111827" stroke-width="5"/>
+  <!-- Wall 4: D(628,60) -> E(628,312)  South 62.875 -->
+  <line x1="628" y1="60" x2="628" y2="312" stroke="#111827" stroke-width="5"/>
+  <!-- Wall 5: E(628,312) -> F(269,312)  West 89.75 -->
+  <line x1="628" y1="312" x2="269" y2="312" stroke="#111827" stroke-width="5"/>
+
+  <!-- Doorway gap: A(170,312) <-> F(269,312) with door swing -->
+  <line x1="170" y1="312" x2="170" y2="213" stroke="#dc2626" stroke-width="2"/>
+  <path d="M 170 213 A 99 99 0 0 1 269 312" fill="none" stroke="#dc2626" stroke-width="1.5" stroke-dasharray="4 4"/>
+
+  <!-- Entry arrow + label -->
+  <line x1="219" y1="372" x2="219" y2="330" stroke="#dc2626" stroke-width="2"/>
+  <polygon points="219,322 214,334 224,334" fill="#dc2626"/>
+  <text x="219" y="386" fill="#dc2626" font-size="13" text-anchor="middle">ENTER (turn left)</text>
+  <text x="219" y="300" fill="#dc2626" font-size="12" text-anchor="middle" font-weight="bold">DOOR 24¾"</text>
+
+  <!-- Wall labels -->
+  <text x="115" y="332" font-size="13" text-anchor="middle">Wall 1: 27½"</text>
+  <text x="52"  y="190" font-size="13" text-anchor="end">Wall 2: 63"</text>
+  <text x="344" y="48"  font-size="13" text-anchor="middle">Wall 3: 142"</text>
+  <text x="636" y="190" font-size="13" text-anchor="start">Wall 4: 62⅞"</text>
+  <text x="448" y="332" font-size="13" text-anchor="middle">Wall 5: 89¾"</text>
+
+  <!-- Wall number badges -->
+  <g font-size="12" font-weight="bold" text-anchor="middle">
+    <circle cx="115" cy="312" r="11" fill="#2563eb"/><text x="115" y="316" fill="#fff">1</text>
+    <circle cx="60"  cy="186" r="11" fill="#2563eb"/><text x="60"  y="190" fill="#fff">2</text>
+    <circle cx="344" cy="60"  r="11" fill="#2563eb"/><text x="344" y="64"  fill="#fff">3</text>
+    <circle cx="628" cy="186" r="11" fill="#2563eb"/><text x="628" y="190" fill="#fff">4</text>
+    <circle cx="448" cy="312" r="11" fill="#2563eb"/><text x="448" y="316" fill="#fff">5</text>
+  </g>
+
+  <text x="350" y="200" font-size="14" fill="#6b7280" text-anchor="middle" font-style="italic">Room ≈ 142" × 63"  (11'10" × 5'3")</text>
+</svg>
