@@ -59,27 +59,29 @@ sector count alone fully determines the geometry (no separate left/right needed)
 Walking the lengths/turns from the door eventually returns near the start; the
 remaining gap back to point A is the **doorway** in the entry wall.
 
-## Compact string format
+## String format (comma-separated)
 
-The whole run can be written as one continuous string with no spaces; the parser
-tokenizes by pattern:
+Items are separated by commas for readability:
 
-    <doorWidth><doorCode>  then repeating  D<sector><length>
+    <doorHeight><doorCode>, D<sector>,<height>,<width>, D<sector>,<height>,<width>, ...
 
-Example: `72RID427.5`
-- `72`   → door **height** 72"
-- `RI`   → right hinge, swing in
+Example: `72RI,D4,109,27.5`
+- `72RI` → 72"-tall door, Right hinge, swing In
 - `D4`   → direction 180° (straight from door molding)
-- `27.5` → Wall 1 = 27½"
+- `109`  → wall height 109"
+- `27.5` → wall width 27½"
 
-Tokenizing rules: a leading number = door **height**; the following letter group
-= door code; then each `D` + single digit (the sector) is followed by a number
-(the wall length) until the next `D`.
-
-The leading number is the door **height** (used for elevation/3D, not the plan
-footprint). The door **width** comes from the opening geometry in the plan
-(opening − moldings, default molding 2.25"). `72RID427.5` reads as
-"72"-tall door, right swing, in; direction 4 (×45° = 180°), 27½"."
+Rules:
+- Leading number = door **height** (elevation/3D, not the plan footprint). The
+  door **width** comes from the opening geometry (the leftover at the closing
+  connection point = door + moldings, default molding 2.25").
+- Per wall: `D<sector>` then dimensions. **Width is always the last number; the
+  number(s) before it are height(s):**
+  - 2 numbers = flat wall → `height, width` (e.g. `D4,109,27.5`)
+  - 3 numbers = raked/vaulted wall → `startHeight, endHeight, width`
+    (e.g. `D4,109,140,27.5`)
+- Wall area = height × width (flat) or (startH + endH)/2 × width (raked).
+  Raked walls handle vaulted ceilings rising to / dropping from a ridge beam.
 
 ## Door codes (prefix the run)
 
