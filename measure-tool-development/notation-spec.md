@@ -59,6 +59,23 @@ sector count alone fully determines the geometry (no separate left/right needed)
 Walking the lengths/turns from the door eventually returns near the start; the
 remaining gap back to point A is the **doorway** in the entry wall.
 
+## Compact string format
+
+The whole run can be written as one continuous string with no spaces; the parser
+tokenizes by pattern:
+
+    <doorWidth><doorCode>  then repeating  D<sector><length>
+
+Example: `72RID427.5`
+- `72`   → door width 72"
+- `RI`   → right hinge, swing in
+- `D4`   → direction 180° (straight from door molding)
+- `27.5` → Wall 1 = 27½"
+
+Tokenizing rules: a leading number = door width; the following letter group =
+door code; then each `D` + single digit (the sector) is followed by a number
+(the wall length) until the next `D`.
+
 ## Door codes (prefix the run)
 
 The string starts with a door-type code describing the entry:
