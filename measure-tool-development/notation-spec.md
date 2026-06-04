@@ -7,10 +7,10 @@ door you entered**. The string is:
 
 Example (full):
 
-    B5.5,QR,84RI,H109,27.5,D2,+115,27.5,D2,-109,27,D2,27.5
+    B5.5,QR,84RI,H109,27.5,>>,+115,27.5,>>,-109,27,>>,27.5
 
 Read as: 5½" baseboard + quarter round on every wall; an 84"-tall right-hinge
-swing-in door; then walls walked clockwise.
+swing-in door; then walls walked clockwise (`>>` = right-90° turns).
 
 ---
 
@@ -22,8 +22,7 @@ swing-in door; then walls walked clockwise.
 3. Measurements are in **inches** (decimals or fractions: `27.5` or `27 1/2`).
 4. Walls run only along **45° multiples** (8 compass directions). Angles are given
    as 45° "sectors" (see §3).
-5. Because traversal is clockwise and Wall 1's start is fixed, each angle's
-   **sector count alone** fully determines the geometry — no left/right needed.
+5. Turns are written as chevrons (`>` right, `<` left), each = 45° (see §3).
 6. **Closing & the doorway:** walking the walls returns near point A; the leftover
    gap back to A is the **doorway**. The door **width** = that leftover (minus
    moldings); see §6.
@@ -43,33 +42,35 @@ slot, so position disambiguates.
 
 ---
 
-## 3. Direction — `D<sector>` (45° sectors)
+## 3. Direction — turn chevrons (`>` / `<`)
 
-`D` = direction/turn; the digit = number of 45° steps. 360° / 45° = 8 sectors.
+The turn to the next wall is written with chevrons that **point the way you turn**;
+each chevron = 45°.
 
-| Sector | Degrees | Meaning (interior angle, clockwise) | Allowed |
-|:---:|:---:|:---|:---:|
-| 1 | 45  | —                                        | NO |
-| 2 | 90  | square corner (turn right 90°)           | yes |
-| 3 | 135 | 45° angled wall (turn right 45°)         | yes |
-| 4 | 180 | wall continues straight                  | yes |
-| 5 | 225 | 45° angled wall (turn left 45°, concave) | yes |
-| 6 | 270 | square notch (turn left 90°, concave)    | yes |
-| 7 | 315 | —                                        | NO |
-| 8 | 360 | full turn / close                        | special |
+| Chevrons | Turn | (old `D`) |
+|:---:|:---|:---:|
+| *(none)* | straight ahead | `D4` |
+| `>`  | turn **right 45°** | `D3` |
+| `>>` | turn **right 90°** | `D2` |
+| `<`  | turn **left 45°**  | `D5` |
+| `<<` | turn **left 90°**  | `D6` |
 
-- Sectors **1 and 7 never occur**.
-- The **first** `D` sets Wall 1's start angle off the entry wall; `D4` (180°) =
-  straight/continuous from the door molding (the default if no `D` is given).
-- A wall with **no `D` continues straight** (collinear) — handy when one straight
-  wall is split into segments only because its ceiling height changes.
+- **Max two chevrons each way.** `>>>` (135° turn) would be the excluded sharp
+  45°/315° corner and never occurs.
+- A wall with **no chevron continues straight** (collinear) — handy when one
+  straight wall is split into segments only because its ceiling height changes.
+- A **leading** chevron sets Wall 1's start angle off the door molding (no chevron
+  = straight/continuous from the molding, the default).
+
+> Older drafts used `D<sector>` where the digit was the interior angle in 45°
+> steps; chevrons replace it. Some reference SVGs still show `D…`.
 
 ---
 
 ## 4. Wall dimensions — height, slope, width
 
-Order within a wall: `D<sector>` (optional) then height/slope (optional) then
-width.
+Order within a wall: turn chevrons `>`/`<` (optional) then height/slope (optional)
+then width.
 
 - `H<height>` — flat wall height. **Sticky:** carries forward to following walls
   until changed.
@@ -84,8 +85,8 @@ width.
 wall's end height, so a vault just chains `+…` up to the ridge then `-…` back
 down. Sloped-wall area = (startH + endH) / 2 × width. Flat area = height × width.
 
-Example: `D4,H108,27.5,+142,65,-108,65` = flat 108"×27½", rise 108→142 over 65"
-(ridge 142"), drop 142→108 over 65".
+Example: `H108,27.5,+142,65,-108,65` = (straight) flat 108"×27½", rise 108→142
+over 65" (ridge 142"), drop 142→108 over 65".
 
 ---
 
@@ -131,7 +132,7 @@ molding **2.25"** each side).
 
 ## 7. Worked example, fully decoded
 
-`B5.5,QR,84RI,H109,27.5,D2,+115,27.5,D2,-109,27,D2,27.5`
+`B5.5,QR,84RI,H109,27.5,>>,+115,27.5,>>,-109,27,>>,27.5`
 
 | Part | Token | Meaning |
 |---|---|---|
@@ -139,9 +140,9 @@ molding **2.25"** each side).
 | trim | `QR` | quarter round, all walls |
 | door | `84RI` | 84"-tall, right hinge, swing in |
 | wall 1 | `H109,27.5` | straight (default), flat 109", 27½" wide |
-| wall 2 | `D2,+115,27.5` | 90° turn, rise 109→115, 27½" wide |
-| wall 3 | `D2,-109,27` | 90° turn, drop 115→109, 27" wide |
-| wall 4 | `D2,27.5` | 90° turn, level 109", 27½" wide |
+| wall 2 | `>>,+115,27.5` | right-90° turn, rise 109→115, 27½" wide |
+| wall 3 | `>>,-109,27` | right-90° turn, drop 115→109, 27" wide |
+| wall 4 | `>>,27.5` | right-90° turn, level 109", 27½" wide |
 
 (Numbers here are illustrative — they don't leave a realistic door width.)
 
@@ -166,7 +167,8 @@ molding **2.25"** each side).
 | `door-codes.svg` | hinged `LI LO RI RO` |
 | `double-door-codes.svg` | `LIRI LORO BLBR S2` |
 | `archway-barn-codes.svg` | `A0 XL XR` |
-| `example-L-Dnotation.svg` | `D4 27.5 D2 64` (L-shape) |
+| `turn-chevrons.svg` | turn chevrons `>` `>>` `<` `<<` |
+| `example-L-Dnotation.svg` | L-shape (shown in old `D` form) |
 | `example-room.svg` | rectangle room |
 | `example-niche.svg` | open run with door+moldings |
 | `wall-height-area.svg` | flat vs raked wall area |

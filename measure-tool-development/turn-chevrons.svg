@@ -1,0 +1,33 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="600" height="380" viewBox="0 0 600 380" font-family="Arial, sans-serif">
+  <rect x="0" y="0" width="600" height="380" fill="#ffffff"/>
+  <text x="300" y="28" font-size="15" font-weight="bold" text-anchor="middle">Turn chevrons — each &gt; or &lt; = 45° (walking up the incoming wall)</text>
+
+  <!-- incoming wall -->
+  <line x1="300" y1="350" x2="300" y2="260" stroke="#111827" stroke-width="6"/>
+  <polygon points="300,256 294,270 306,270" fill="#111827"/>
+  <text x="300" y="368" font-size="11" fill="#6b7280" text-anchor="middle">incoming wall (you walk up)</text>
+  <circle cx="300" cy="260" r="4" fill="#2563eb"/>
+
+  <!-- rays -->
+  <!-- straight up -->
+  <line x1="300" y1="260" x2="300" y2="150" stroke="#9ca3af" stroke-width="4" stroke-dasharray="6 4"/>
+  <text x="300" y="140" font-size="12" fill="#6b7280" text-anchor="middle">straight (none)</text>
+
+  <!-- > right 45 (NE) -->
+  <line x1="300" y1="260" x2="378" y2="182" stroke="#059669" stroke-width="4"/>
+  <text x="392" y="178" font-size="13" font-weight="bold" fill="#059669" text-anchor="start">&gt;  R45°</text>
+
+  <!-- >> right 90 (E) -->
+  <line x1="300" y1="260" x2="410" y2="260" stroke="#059669" stroke-width="4"/>
+  <text x="420" y="264" font-size="13" font-weight="bold" fill="#059669" text-anchor="start">&gt;&gt;  R90°</text>
+
+  <!-- < left 45 (NW) -->
+  <line x1="300" y1="260" x2="222" y2="182" stroke="#b45309" stroke-width="4"/>
+  <text x="208" y="178" font-size="13" font-weight="bold" fill="#b45309" text-anchor="end">L45°  &lt;</text>
+
+  <!-- << left 90 (W) -->
+  <line x1="300" y1="260" x2="190" y2="260" stroke="#b45309" stroke-width="4"/>
+  <text x="180" y="264" font-size="13" font-weight="bold" fill="#b45309" text-anchor="end">L90°  &lt;&lt;</text>
+
+  <text x="300" y="330" font-size="11" fill="#374151" text-anchor="middle" font-style="italic">max two chevrons each way — &gt;&gt;&gt; (135° turn) would be the excluded sharp corner</text>
+</svg>
