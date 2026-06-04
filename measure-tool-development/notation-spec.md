@@ -47,20 +47,18 @@ slot, so position disambiguates.
 The turn to the next wall is written with chevrons that **point the way you turn**;
 each chevron = 45°.
 
-| Chevrons | Turn | (old `D`) |
-|:---:|:---|:---:|
-| *(none)* | straight ahead | `D4` |
-| `>`  | turn **right 45°**  | `D3` |
-| `>>` | turn **right 90°**  | `D2` |
-| `>>>`| turn **right 135°** | — |
-| `<`  | turn **left 45°**   | `D5` |
-| `<<` | turn **left 90°**   | `D6` |
-| `<<<`| turn **left 135°**  | — |
+Each chevron = **45° of turn**; `>` = right, `<` = left. "Follow your nose."
 
-- **Max three chevrons each way** = up to a 135° turn.
-- **A single chevron = a 45° turn.** Open question: it was stated that a 45°
-  *right* turn never occurs, yet an example used a single `<` (45° left) — confirm
-  whether single chevrons are allowed (and on which side).
+| Chevrons | Turn | Corner formed | (old `D`) |
+|:---:|:---|:---|:---:|
+| *(none)*   | straight     | 180°               | `D4` |
+| `>` / `<`  | 45° right/left  | **135° obtuse**  | `D3` / `D5` |
+| `>>` / `<<`| 90° right/left  | **90° square**   | `D2` / `D6` |
+
+- **Max two chevrons each way.** Three chevrons (135° turn) would force an acute
+  45° corner, which never occurs in wall construction.
+- A single chevron is normal — it's the gentle 45° turn that makes a **135°
+  obtuse corner**.
 - A wall with **no chevron continues straight** (collinear) — handy when one
   straight wall is split into segments only because its ceiling height changes.
 - A **leading** chevron sets Wall 1's start angle off the door molding (no chevron
