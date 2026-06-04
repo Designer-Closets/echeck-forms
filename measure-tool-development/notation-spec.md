@@ -50,13 +50,17 @@ each chevron = 45°.
 | Chevrons | Turn | (old `D`) |
 |:---:|:---|:---:|
 | *(none)* | straight ahead | `D4` |
-| `>`  | turn **right 45°** | `D3` |
-| `>>` | turn **right 90°** | `D2` |
-| `<`  | turn **left 45°**  | `D5` |
-| `<<` | turn **left 90°**  | `D6` |
+| `>`  | turn **right 45°**  | `D3` |
+| `>>` | turn **right 90°**  | `D2` |
+| `>>>`| turn **right 135°** | — |
+| `<`  | turn **left 45°**   | `D5` |
+| `<<` | turn **left 90°**   | `D6` |
+| `<<<`| turn **left 135°**  | — |
 
-- **Max two chevrons each way.** `>>>` (135° turn) would be the excluded sharp
-  45°/315° corner and never occurs.
+- **Max three chevrons each way** = up to a 135° turn.
+- **A single chevron = a 45° turn.** Open question: it was stated that a 45°
+  *right* turn never occurs, yet an example used a single `<` (45° left) — confirm
+  whether single chevrons are allowed (and on which side).
 - A wall with **no chevron continues straight** (collinear) — handy when one
   straight wall is split into segments only because its ceiling height changes.
 - A **leading** chevron sets Wall 1's start angle off the door molding (no chevron
@@ -168,6 +172,7 @@ molding **2.25"** each side).
 | `double-door-codes.svg` | `LIRI LORO BLBR S2` |
 | `archway-barn-codes.svg` | `A0 XL XR` |
 | `turn-chevrons.svg` | turn chevrons `>` `>>` `<` `<<` |
+| `example-left-turn.svg` | a room with a left-turn (`<`) wall |
 | `example-L-Dnotation.svg` | L-shape (shown in old `D` form) |
 | `example-room.svg` | rectangle room |
 | `example-niche.svg` | open run with door+moldings |

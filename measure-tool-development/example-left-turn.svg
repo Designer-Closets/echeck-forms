@@ -1,0 +1,38 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="380" height="360" viewBox="0 0 380 360" font-family="Arial, sans-serif">
+  <rect x="0" y="0" width="380" height="360" fill="#ffffff"/>
+  <text x="190" y="22" font-size="12" font-weight="bold" text-anchor="middle">B5.5,QR,84RI,H109,27.5,&gt;&gt;,+115,27.5,&gt;&gt;,-109,27,&lt;,27.5</text>
+
+  <!-- Wall 1: West 27.5 -->
+  <line x1="198" y1="295" x2="60" y2="295" stroke="#111827" stroke-width="6"/>
+  <text x="129" y="313" font-size="11" font-weight="bold" text-anchor="middle">27½"  H109</text>
+
+  <!-- Wall 2: North 27.5 (rise +115) -->
+  <line x1="60" y1="295" x2="60" y2="157" stroke="#111827" stroke-width="6"/>
+  <text x="50" y="228" font-size="11" font-weight="bold" text-anchor="end">27½"</text>
+  <text x="50" y="242" font-size="10" fill="#059669" text-anchor="end">+115</text>
+
+  <!-- Wall 3: East 27 (drop -109) -->
+  <line x1="60" y1="157" x2="195" y2="157" stroke="#111827" stroke-width="6"/>
+  <text x="127" y="149" font-size="11" font-weight="bold" text-anchor="middle">27"</text>
+  <text x="127" y="135" font-size="10" fill="#059669" text-anchor="middle">-109</text>
+
+  <!-- Wall 4: NE diagonal 27.5 (left 45) -->
+  <line x1="195" y1="157" x2="292" y2="60" stroke="#111827" stroke-width="6"/>
+  <text x="255" y="100" font-size="11" font-weight="bold" text-anchor="middle" transform="rotate(-45 255 100)">27½" (level 109)</text>
+
+  <!-- turn badges -->
+  <g font-size="11" font-weight="bold" text-anchor="middle">
+    <circle cx="74" cy="281" r="11" fill="#059669"/><text x="74" y="285" fill="#fff">&gt;&gt;</text>
+    <circle cx="74" cy="157" r="11" fill="#059669"/><text x="74" y="161" fill="#fff">&gt;&gt;</text>
+    <circle cx="195" cy="157" r="12" fill="#b45309"/><text x="195" y="161" fill="#fff">&lt;</text>
+  </g>
+  <text x="222" y="172" font-size="11" fill="#b45309" font-weight="bold" text-anchor="start">left 45°</text>
+
+  <!-- door at A, entry wall continues right -->
+  <line x1="198" y1="295" x2="280" y2="295" stroke="#9ca3af" stroke-width="5"/>
+  <text x="239" y="313" font-size="10" fill="#6b7280" text-anchor="middle">door / entry</text>
+  <circle cx="198" cy="295" r="4" fill="#2563eb"/>
+  <text x="198" y="286" font-size="10" fill="#2563eb" text-anchor="middle">A</text>
+
+  <text x="190" y="345" font-size="10" fill="#374151" text-anchor="middle" font-style="italic">the single left chevron kicks wall 4 out at 45° (concave / opening up)</text>
+</svg>
