@@ -1,0 +1,452 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Designer Closets &amp; Cabinets — Savings Certificate</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,500&family=Playfair+Display:wght@500;600;700;900&family=Pinyon+Script&family=JetBrains+Mono:wght@500;700&display=swap" rel="stylesheet">
+<style>
+    :root{
+        --burgundy:#7a1620;
+        --burgundy-deep:#5f0f17;
+        --red:#9b1c24;
+        --gold:#c2a14d;
+        --gold-deep:#a67c2e;
+        --gold-soft:#d8bd73;
+        --cream:#fbf4e2;
+        --cream-2:#f6ecd2;
+        --ink:#4a3a28;
+        --ink-soft:#6f5b41;
+    }
+
+    *{margin:0;padding:0;box-sizing:border-box;}
+
+    html,body{
+        background:#e9e2d2;
+        font-family:'Cormorant Garamond',Georgia,serif;
+        color:var(--ink);
+        -webkit-font-smoothing:antialiased;
+    }
+
+    .stage{
+        padding:34px 20px 48px;
+        display:flex;
+        flex-direction:column;
+        align-items:center;
+    }
+
+    .tagline{
+        font-family:'Cormorant Garamond',serif;
+        font-style:italic;
+        font-size:24px;
+        font-weight:500;
+        color:var(--red);
+        letter-spacing:.3px;
+        margin-bottom:22px;
+        text-align:center;
+    }
+
+    /* ---------- Certificate frame ---------- */
+    .cert{
+        position:relative;
+        width:980px;
+        max-width:100%;
+        background:
+            radial-gradient(120% 140% at 78% 30%, rgba(255,255,255,.45), rgba(255,255,255,0) 55%),
+            linear-gradient(180deg,var(--cream) 0%,var(--cream-2) 100%);
+        border:2px solid var(--gold-deep);
+        box-shadow:0 22px 50px rgba(60,20,20,.22);
+        display:flex;
+        overflow:hidden;
+    }
+    /* inner hairline frame */
+    .cert::after{
+        content:"";
+        position:absolute;
+        inset:9px;
+        border:1px solid var(--gold);
+        pointer-events:none;
+        z-index:4;
+    }
+
+    /* faint watermark */
+    .watermark{
+        position:absolute;
+        right:-40px;
+        top:50%;
+        transform:translateY(-50%) rotate(-16deg);
+        font-family:'Pinyon Script',cursive;
+        font-size:150px;
+        color:rgba(122,22,32,.05);
+        white-space:nowrap;
+        pointer-events:none;
+        z-index:1;
+    }
+
+    /* corner diamonds */
+    .corner{
+        position:absolute;
+        width:18px;height:18px;
+        background:var(--burgundy);
+        border:2px solid var(--gold);
+        transform:rotate(45deg);
+        z-index:5;
+    }
+    .corner.tl{top:16px;left:16px;}
+    .corner.tr{top:16px;right:16px;}
+    .corner.bl{bottom:16px;left:16px;}
+    .corner.br{bottom:16px;right:16px;}
+
+    /* ---------- Left stub ---------- */
+    .stub{
+        position:relative;
+        flex:0 0 232px;
+        background:
+            linear-gradient(180deg,var(--burgundy) 0%,var(--burgundy-deep) 100%);
+        color:#f3e7c9;
+        padding:30px 22px;
+        display:flex;
+        flex-direction:column;
+        align-items:center;
+        text-align:center;
+        z-index:2;
+    }
+    .stub::after{ /* perforation */
+        content:"";
+        position:absolute;
+        top:14px;bottom:14px;right:0;
+        border-right:2px dashed rgba(255,255,255,.45);
+    }
+
+    .medallion{
+        width:96px;height:96px;border-radius:50%;
+        background:radial-gradient(circle at 50% 38%,#1c1c1c,#000);
+        border:3px solid var(--gold);
+        box-shadow:0 0 0 3px var(--burgundy-deep),0 4px 12px rgba(0,0,0,.4);
+        display:flex;align-items:center;justify-content:center;
+        position:relative;margin-bottom:18px;
+    }
+    .medallion .mono{
+        font-family:'Playfair Display',serif;
+        font-weight:900;font-size:34px;color:var(--gold-soft);
+        letter-spacing:1px;
+    }
+    .medallion .ring-top,.medallion .ring-bot{
+        position:absolute;left:0;right:0;text-align:center;
+        font-family:'Cormorant Garamond',serif;
+        font-size:6.5px;letter-spacing:1px;color:#e9d9ad;
+    }
+    .medallion .ring-top{top:9px;}
+    .medallion .ring-bot{bottom:9px;}
+
+    .stub-label{
+        font-family:'Playfair Display',serif;
+        letter-spacing:6px;font-size:13px;font-weight:600;
+        color:var(--gold-soft);
+        margin-bottom:6px;
+    }
+    .stub-amount{
+        font-family:'Playfair Display',serif;
+        font-weight:900;font-size:76px;line-height:1;
+        color:#fff;
+        text-shadow:0 2px 6px rgba(0,0,0,.35);
+    }
+    .stub-amount sup{font-size:30px;top:-1.1em;font-weight:700;}
+    .stub-sub{
+        font-style:italic;font-size:16px;line-height:1.35;
+        color:#ecd9b4;margin-top:8px;max-width:170px;
+    }
+    .stub-code{
+        margin-top:auto;
+        font-family:'JetBrains Mono',monospace;
+        font-size:13px;letter-spacing:2px;font-weight:700;
+        color:var(--burgundy-deep);
+        background:var(--gold-soft);
+        border-radius:4px;
+        padding:6px 16px;
+    }
+
+    /* ---------- Main body ---------- */
+    .body{
+        position:relative;
+        flex:1;
+        padding:30px 38px 22px;
+        z-index:2;
+        display:flex;
+        flex-direction:column;
+    }
+
+    .brand{
+        font-family:'Pinyon Script',cursive;
+        font-size:50px;line-height:.9;
+        color:var(--red);
+        margin-bottom:4px;
+    }
+    .brand-sub{
+        font-family:'Playfair Display',serif;
+        font-weight:600;font-size:11px;letter-spacing:5px;
+        color:var(--gold-deep);
+        text-transform:uppercase;
+    }
+    .cert-title{
+        font-family:'Playfair Display',serif;
+        font-weight:600;font-size:15px;letter-spacing:9px;
+        color:var(--ink-soft);
+        margin:14px 0 12px;
+        text-transform:uppercase;
+    }
+
+    .offer{display:flex;gap:20px;align-items:flex-start;}
+    .offer-amount{
+        font-family:'Playfair Display',serif;
+        font-weight:900;font-size:88px;line-height:.85;
+        color:var(--red);
+    }
+    .offer-amount sup{font-size:34px;top:-1.2em;}
+    .offer-text{
+        font-size:19px;line-height:1.4;color:var(--ink);
+        padding-top:6px;
+    }
+    .offer-text b{color:var(--red);font-weight:700;}
+
+    .plus{
+        display:inline-flex;align-items:center;gap:10px;
+        margin:16px 0 4px;
+        font-family:'Playfair Display',serif;
+        font-weight:700;font-size:17px;letter-spacing:.5px;
+        color:var(--burgundy);
+    }
+    .plus::before,.plus::after{
+        content:"";height:1px;width:34px;background:var(--gold-deep);
+    }
+    .plus em{color:var(--red);font-style:normal;}
+
+    .redeem{
+        font-size:15.5px;line-height:1.45;color:var(--ink-soft);
+        margin-top:12px;
+    }
+    .redeem b{color:var(--red);}
+    .redeem a{color:var(--red);text-decoration:none;font-weight:600;}
+
+    .rule{height:1px;background:linear-gradient(90deg,transparent,var(--gold) 18%,var(--gold) 82%,transparent);margin:18px 0;}
+
+    /* recipient + code row */
+    .recipient-row{
+        display:flex;align-items:flex-end;gap:24px;
+    }
+    .recipient{flex:1;}
+    .recipient .name{
+        font-family:'Pinyon Script',cursive;
+        font-size:38px;color:var(--burgundy);
+        line-height:1;
+        border-bottom:1.5px solid var(--gold-deep);
+        padding:0 8px 4px;
+    }
+    .recipient .meta{
+        font-style:italic;font-size:14px;color:var(--ink-soft);
+        margin-top:6px;
+    }
+    .recipient .field-label{
+        font-size:12px;letter-spacing:2px;text-transform:uppercase;
+        color:var(--gold-deep);font-weight:600;margin-bottom:6px;
+        font-family:'Playfair Display',serif;
+    }
+    .code-plate{
+        flex:0 0 auto;
+        text-align:center;
+        border:1.5px solid var(--gold-deep);
+        border-radius:6px;
+        padding:8px 16px 10px;
+        background:rgba(255,255,255,.5);
+    }
+    .code-plate .label{
+        font-family:'Playfair Display',serif;
+        font-size:9.5px;letter-spacing:3px;text-transform:uppercase;
+        color:var(--gold-deep);font-weight:600;
+    }
+    .code-plate .code{
+        font-family:'JetBrains Mono',monospace;
+        font-size:20px;font-weight:700;letter-spacing:1px;
+        color:var(--burgundy);margin-top:3px;
+    }
+
+    /* activation / reviews — integrated, no floating band */
+    .activate{
+        margin-top:20px;
+        border:1px solid var(--gold);
+        border-radius:8px;
+        background:rgba(255,255,255,.4);
+        padding:14px 18px;
+        display:flex;align-items:center;gap:18px;
+    }
+    .activate .seal{
+        flex:0 0 auto;
+        font-family:'Playfair Display',serif;
+        font-weight:700;font-size:13px;line-height:1.25;
+        color:var(--burgundy);
+        max-width:180px;
+    }
+    .activate .seal small{
+        display:block;font-family:'Cormorant Garamond',serif;
+        font-weight:500;font-style:italic;font-size:13.5px;
+        color:var(--ink-soft);margin-top:3px;
+    }
+    .activate .links{
+        display:flex;gap:12px;margin-left:auto;
+    }
+    .rev-btn{
+        display:inline-flex;align-items:center;gap:8px;
+        text-decoration:none;
+        font-family:'Playfair Display',serif;
+        font-weight:600;font-size:13px;letter-spacing:.5px;
+        padding:9px 16px;border-radius:6px;
+        border:1.5px solid var(--gold-deep);
+        color:var(--burgundy);
+        background:linear-gradient(180deg,#fff,#f3e8cf);
+        transition:transform .15s ease,box-shadow .15s ease;
+        white-space:nowrap;
+    }
+    .rev-btn:hover{transform:translateY(-1px);box-shadow:0 4px 10px rgba(122,22,32,.18);}
+    .rev-btn .ic{
+        width:18px;height:18px;display:inline-flex;align-items:center;justify-content:center;
+        font-weight:700;font-size:12px;border-radius:50%;
+        background:var(--burgundy);color:var(--gold-soft);
+        font-family:'JetBrains Mono',monospace;
+    }
+
+    .footer{
+        margin-top:auto;
+        padding-top:14px;
+    }
+    .footer .addr{
+        text-align:center;font-size:13px;color:var(--burgundy);
+        font-weight:600;letter-spacing:.3px;
+    }
+    .footer .fine{
+        text-align:center;font-size:10px;line-height:1.4;
+        color:var(--ink-soft);margin-top:6px;
+        max-width:760px;margin-left:auto;margin-right:auto;
+    }
+
+    /* ---------- print ---------- */
+    @media print{
+        @page{size:landscape;margin:0;}
+        html,body{background:#fff;}
+        .stage{padding:0;}
+        .tagline{margin:14px 0;}
+        .cert{box-shadow:none;width:100%;}
+    }
+
+    @media (max-width:720px){
+        .cert{flex-direction:column;}
+        .stub{flex-basis:auto;}
+        .stub::after{display:none;}
+        .stub-code{margin-top:18px;}
+        .offer-amount{font-size:64px;}
+        .recipient-row{flex-direction:column;align-items:stretch;}
+        .activate{flex-direction:column;align-items:flex-start;}
+        .activate .links{margin-left:0;}
+    }
+</style>
+</head>
+<body>
+<div class="stage">
+
+    <div class="tagline">With our thanks — a gift toward your next project.</div>
+
+    <div class="cert">
+        <div class="watermark">Designer&nbsp;Closets</div>
+        <span class="corner tl"></span><span class="corner tr"></span>
+        <span class="corner bl"></span><span class="corner br"></span>
+
+        <!-- ============ STUB ============ -->
+        <aside class="stub">
+            <div class="medallion">
+                <span class="ring-top">WWW.DESIGNER-CLOSETS.COM</span>
+                <span class="mono">DC</span>
+                <span class="ring-bot">TEL (407) 505-0865</span>
+            </div>
+            <div class="stub-label">GIFT&nbsp;COUPON</div>
+            <div class="stub-amount"><sup>$</sup>250</div>
+            <div class="stub-sub">toward your next custom Closet or Cabinet</div>
+            <!-- offer code -->
+            <div class="stub-code">DCC-250</div>
+        </aside>
+
+        <!-- ============ BODY ============ -->
+        <main class="body">
+            <div class="brand">Designer Closets &amp; Cabinets</div>
+            <div class="brand-sub">Factory-Direct&nbsp;·&nbsp;Family-Run&nbsp;·&nbsp;St.&nbsp;Cloud,&nbsp;Florida</div>
+
+            <div class="cert-title">Savings Certificate</div>
+
+            <div class="offer">
+                <div class="offer-amount"><sup>$</sup>250</div>
+                <div class="offer-text">
+                    applied toward your next purchase of
+                    <b>custom Closets or Cabinets</b> — designed free in 3D,
+                    CNC-precision built in our own factory, and installed with a
+                    <b>lifetime guarantee</b>.
+                </div>
+            </div>
+
+            <div class="plus">PLUS&nbsp;—&nbsp;<em>enjoy 40% OFF our regular pricing, every day</em></div>
+
+            <div class="redeem">
+                <b>How to redeem:</b> book your free in-home design consultation at
+                <a href="tel:+14075050865">(407) 505-0865</a> or
+                <a href="https://www.designer-closets.com">www.designer-closets.com</a>
+                and present this certificate (or mention code <b>DCC-250</b>). Your
+                $250 is credited on your project proposal — on top of our everyday
+                40% factory-direct discount.
+            </div>
+
+            <div class="rule"></div>
+
+            <!-- recipient + redemption code -->
+            <div class="recipient-row">
+                <div class="recipient">
+                    <div class="field-label">Presented to</div>
+                    <!-- DYNAMIC: {{ recipient_name }} -->
+                    <div class="name">Valued Customer</div>
+                    <!-- DYNAMIC: {{ project_summary }} -->
+                    <div class="meta">Project&nbsp;#0000000 — Closet / Cabinet scope</div>
+                </div>
+                <div class="code-plate">
+                    <div class="label">Redemption Code</div>
+                    <!-- DYNAMIC: {{ redemption_code }} -->
+                    <div class="code">XXXX-0000000X</div>
+                </div>
+            </div>
+
+            <!-- activation via reviews — integrated panel -->
+            <div class="activate">
+                <div class="seal">
+                    Activate your certificate
+                    <small>Valid upon submission of a review on Google &amp; BBB.</small>
+                </div>
+                <div class="links">
+                    <a class="rev-btn" href="https://g.page/r/CaP-zgSdZXXPEBE/review" target="_blank" rel="noopener">
+                        <span class="ic">G</span> Review on Google
+                    </a>
+                    <a class="rev-btn" href="https://www.bbb.org/us/fl/st-cloud/profile/closet-organizers/designer-closets-cabinets-0733-90707579/customer-reviews" target="_blank" rel="noopener">
+                        <span class="ic">B</span> Review on BBB
+                    </a>
+                </div>
+            </div>
+
+            <div class="footer">
+                <div class="addr">Designer Closets &amp; Cabinets&nbsp;·&nbsp;1479 Belladonna Place, St. Cloud, FL 34771&nbsp;·&nbsp;(407) 505-0865&nbsp;·&nbsp;sales@designer-closets.com</div>
+                <div class="fine">
+                    One certificate per household / project. Applies to new custom closet or cabinet orders; not redeemable for cash and not
+                    combinable with other certificates. The 40% discount is our standard factory-direct pricing off regular retail.
+                    Thank you for your business — we welcome &amp; appreciate referrals!
+                </div>
+            </div>
+        </main>
+    </div>
+</div>
+</body>
+</html>
