@@ -1,0 +1,51 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="640" height="540" viewBox="0 0 640 540" font-family="Arial, sans-serif">
+  <rect x="0" y="0" width="640" height="540" fill="#ffffff"/>
+  <text x="320" y="30" font-size="18" font-weight="bold" text-anchor="middle">Hinged door codes — H dropped, hinge assumed (viewpoint: entering the room)</text>
+
+  <!-- Room (inside) tint hints -->
+  <text x="320" y="55" font-size="12" fill="#2563eb" text-anchor="middle">INSIDE = into the room   •   OUTSIDE = out of the room   •   L/R = hinge side as you face the door</text>
+
+  <!-- ===== Row 1: INSIDE swing ===== -->
+  <!-- HLI : cx160 wy150 -->
+  <line x1="50" y1="150" x2="130" y2="150" stroke="#111827" stroke-width="5"/>
+  <line x1="190" y1="150" x2="270" y2="150" stroke="#111827" stroke-width="5"/>
+  <line x1="130" y1="150" x2="130" y2="90" stroke="#dc2626" stroke-width="3"/>
+  <path d="M130,90 A60,60 0 0,1 190,150" fill="none" stroke="#dc2626" stroke-width="1.5" stroke-dasharray="5 4"/>
+  <circle cx="130" cy="150" r="5" fill="#dc2626"/>
+  <text x="160" y="200" font-size="15" font-weight="bold" text-anchor="middle">LI</text>
+  <text x="160" y="218" font-size="11" fill="#6b7280" text-anchor="middle">hinge left, swing in</text>
+
+  <!-- HRI : cx480 wy150 -->
+  <line x1="370" y1="150" x2="450" y2="150" stroke="#111827" stroke-width="5"/>
+  <line x1="510" y1="150" x2="590" y2="150" stroke="#111827" stroke-width="5"/>
+  <line x1="510" y1="150" x2="510" y2="90" stroke="#dc2626" stroke-width="3"/>
+  <path d="M510,90 A60,60 0 0,0 450,150" fill="none" stroke="#dc2626" stroke-width="1.5" stroke-dasharray="5 4"/>
+  <circle cx="510" cy="150" r="5" fill="#dc2626"/>
+  <text x="480" y="200" font-size="15" font-weight="bold" text-anchor="middle">RI</text>
+  <text x="480" y="218" font-size="11" fill="#6b7280" text-anchor="middle">hinge right, swing in</text>
+
+  <text x="20" y="120" font-size="12" fill="#2563eb" transform="rotate(-90 20 120)" text-anchor="middle">↑ ROOM (inside)</text>
+
+  <!-- ===== Row 2: OUTSIDE swing ===== -->
+  <!-- HLO : cx160 wy380 -->
+  <line x1="50" y1="380" x2="130" y2="380" stroke="#111827" stroke-width="5"/>
+  <line x1="190" y1="380" x2="270" y2="380" stroke="#111827" stroke-width="5"/>
+  <line x1="130" y1="380" x2="130" y2="440" stroke="#dc2626" stroke-width="3"/>
+  <path d="M130,440 A60,60 0 0,0 190,380" fill="none" stroke="#dc2626" stroke-width="1.5" stroke-dasharray="5 4"/>
+  <circle cx="130" cy="380" r="5" fill="#dc2626"/>
+  <text x="160" y="335" font-size="15" font-weight="bold" text-anchor="middle">LO</text>
+  <text x="160" y="353" font-size="11" fill="#6b7280" text-anchor="middle">hinge left, swing out</text>
+
+  <!-- HRO : cx480 wy380 -->
+  <line x1="370" y1="380" x2="450" y2="380" stroke="#111827" stroke-width="5"/>
+  <line x1="510" y1="380" x2="590" y2="380" stroke="#111827" stroke-width="5"/>
+  <line x1="510" y1="380" x2="510" y2="440" stroke="#dc2626" stroke-width="3"/>
+  <path d="M510,440 A60,60 0 0,1 450,380" fill="none" stroke="#dc2626" stroke-width="1.5" stroke-dasharray="5 4"/>
+  <circle cx="510" cy="380" r="5" fill="#dc2626"/>
+  <text x="480" y="335" font-size="15" font-weight="bold" text-anchor="middle">RO</text>
+  <text x="480" y="353" font-size="11" fill="#6b7280" text-anchor="middle">hinge right, swing out</text>
+
+  <text x="20" y="410" font-size="12" fill="#9ca3af" transform="rotate(-90 20 410)" text-anchor="middle">↓ OUTSIDE</text>
+
+  <text x="320" y="510" font-size="12" fill="#374151" text-anchor="middle" font-style="italic">Door code prefixes the run, e.g.  LI D4 27.5 D2 64</text>
+</svg>

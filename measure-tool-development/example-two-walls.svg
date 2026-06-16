@@ -1,0 +1,28 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="380" height="470" viewBox="0 0 380 470" font-family="Arial, sans-serif">
+  <rect x="0" y="0" width="380" height="470" fill="#ffffff"/>
+
+  <!-- Entry wall to the right of door (baseline) -->
+  <line x1="207.5" y1="405" x2="330" y2="405" stroke="#9ca3af" stroke-width="5"/>
+  <text x="270" y="425" font-size="11" fill="#6b7280" text-anchor="middle">entry wall</text>
+
+  <!-- Door at A -->
+  <line x1="207.5" y1="405" x2="207.5" y2="345" stroke="#dc2626" stroke-width="2"/>
+  <path d="M 207.5 345 A 60 60 0 0 0 147.5 405" fill="none" stroke="#dc2626" stroke-width="1.5" stroke-dasharray="4 4"/>
+  <text x="207.5" y="445" font-size="12" fill="#dc2626" text-anchor="middle">DOOR (enter)</text>
+
+  <!-- Wall 1: A -> B, straight left (-4-), 27.5 -->
+  <line x1="207.5" y1="405" x2="70" y2="405" stroke="#111827" stroke-width="6"/>
+  <text x="138" y="425" font-size="13" font-weight="bold" text-anchor="middle">Wall 1: 27½"</text>
+
+  <!-- Wall 2: B -> C, up (after 90 turn), 67 -->
+  <line x1="70" y1="405" x2="70" y2="70" stroke="#111827" stroke-width="6"/>
+  <text x="58" y="240" font-size="13" font-weight="bold" text-anchor="end">Wall 2: 67"</text>
+
+  <!-- Corner B: 90 = 2 sectors -->
+  <path d="M 70 375 L 70 405 L 100 405" fill="none" stroke="#059669" stroke-width="2"/>
+  <text x="108" y="385" font-size="12" fill="#059669" font-weight="bold" text-anchor="start">-2- = 90°</text>
+
+  <!-- badges -->
+  <circle cx="207.5" cy="405" r="5" fill="#2563eb"/>
+  <text x="350" y="240" font-size="12" fill="#9ca3af" transform="rotate(-90 350 240)" text-anchor="middle">-4- 27.5 -2- 67</text>
+</svg>
