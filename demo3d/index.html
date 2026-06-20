@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<style>html,body{margin:0;background:#0a1220;overflow:hidden}</style>
+</head>
+<body>
+<script type="module">
+import * as THREE from './three.module.js';
+
+const params = new URLSearchParams(location.search);
+const MODE = params.get('mode') || 'solid';   // 'flat' | 'solid'
+
+// ---- inch-based scene (1 unit = 1 inch) ----
+const UW = 36, UH = 84, UD = 16;     // unit width / height / depth
+const T  = 0.75;                      // panel thickness
+
+const renderer = new THREE.WebGLRenderer({ antialias:true, preserveDrawingBuffer:true });
+renderer.setPixelRatio(window.devicePixelRatio);
+renderer.setSize(window.innerWidth, window.innerHeight);
+document.body.appendChild(renderer.domElement);
+
+const scene = new THREE.Scene();
+scene.background = new THREE.Color('#0a1424');
+
+const cam = new THREE.PerspectiveCamera(36, window.innerWidth/window.innerHeight, 1, 5000);
+cam.position.set(52, 54, 176);
+cam.lookAt(0, 43, -10);
+
+// ---- lighting ----
+scene.add(new THREE.HemisphereLight('#ffffff', '#33415a', 0.95));
+const key = new THREE.DirectionalLight('#ffffff', 1.05);
+key.position.set(60, 130, 120); scene.add(key);
+const fill = new THREE.DirectionalLight('#cfe0ff', 0.35);
+fill.position.set(-90, 60, 40); scene.add(fill);
+
+// ---- materials ----
+const blue   = new THREE.MeshStandardMaterial({ color:'#9cc3f0', roughness:.95, metalness:0, side:THREE.DoubleSide });
+const mel    = new THREE.MeshStandardMaterial({ color:'#f3f1ec', roughness:.7 });   // white melamine
+const melEdge= new THREE.MeshStandardMaterial({ color:'#e7e3da', roughness:.7 });
+const back   = new THREE.MeshStandardMaterial({ color:'#fbfaf7', roughness:.85 });
+const wood   = new THREE.MeshStandardMaterial({ color:'#6e4a2c', roughness:.6 });
+
+function box(w,h,d, mat, x,y,z){
+  const m = new THREE.Mesh(new THREE.BoxGeometry(w,h,d), mat);
+  m.position.set(x,y,z); scene.add(m); return m;
+}
+
+// ---- alcove walls + floor ----
+box(150, 150, 2, blue, 0, 60, -42);          // back wall
+box(2, 150, 110, blue, -62, 60, 12);         // left wall
+box(2, 150, 110, blue,  62, 60, 12);         // right wall
+const grid = new THREE.GridHelper(360, 30, '#22364f', '#16273c');
+grid.position.y = 0.02; scene.add(grid);
+box(360, .04, 360, new THREE.MeshStandardMaterial({color:'#0c182a',roughness:1}), 0,-0.02,0);
+
+// ============ THE UNIT ============
+const zFront = -42 + 2/2 + UD/2;             // sit just off the back wall
+const unit = new THREE.Group(); unit.position.set(0,0,zFront); scene.add(unit);
+
+function faceTexture(){
+  // a stand-in "2D elevation face from catalog"
+  const c = document.createElement('canvas'); c.width=512; c.height=1024;
+  const g = c.getContext('2d');
+  g.fillStyle='#f3f1ec'; g.fillRect(0,0,512,1024);
+  g.strokeStyle='#cfcabf'; g.lineWidth=4;
+  [120,470,640,760,880].forEach(y=>{ g.beginPath(); g.moveTo(8,y); g.lineTo(504,y); g.stroke(); });
+  g.fillStyle='#6e4a2c'; g.fillRect(8,884,496,132);   // wood bottom drawer
+  g.strokeRect(2,2,508,1020);
+  const t = new THREE.CanvasTexture(c); t.colorSpace = THREE.SRGBColorSpace; return t;
+}
+
+if (MODE === 'flat'){
+  // ---- BEFORE: single flat plane with the catalog face (paper-thin) ----
+  const plane = new THREE.Mesh(
+    new THREE.PlaneGeometry(UW, UH),
+    new THREE.MeshStandardMaterial({ map:faceTexture(), roughness:.8, side:THREE.DoubleSide })
+  );
+  plane.position.set(0, UH/2, UD/2);
+  unit.add(plane);
+} else {
+  // ---- AFTER: real carcass with depth + shelves + drawers ----
+  const iw = UW - 2*T;                          // interior width
+  function ubox(w,h,d,mat,x,y,z){ const m=new THREE.Mesh(new THREE.BoxGeometry(w,h,d),mat); m.position.set(x,y,z); unit.add(m); return m; }
+  // carcass
+  ubox(T, UH, UD, melEdge, -(UW/2 - T/2), UH/2, 0);          // left side
+  ubox(T, UH, UD, melEdge,  (UW/2 - T/2), UH/2, 0);          // right side
+  ubox(UW, T, UD, melEdge, 0, T/2, 0);                       // bottom
+  ubox(UW, T, UD, melEdge, 0, UH - T/2, 0);                  // top
+  ubox(UW, UH, T, back, 0, UH/2, -(UD/2 - T/2));             // back panel
+
+  // shelves (open upper section)
+  [UH*0.93, UH*0.60].forEach(y => ubox(iw, T, UD - 1.5, mel, 0, y, -0.5));
+
+  // drawer bank (bottom): 3 fronts, slightly proud, reveal gaps
+  const bankBottom = T, bankTop = UH*0.34;
+  const n = 3, gap = 0.6;
+  const dh = (bankTop - bankBottom - gap*(n+1)) / n;
+  for (let i=0;i<n;i++){
+    const y = bankBottom + gap*(i+1) + dh*(i+0.5);
+    const mat = (i===0) ? wood : mel;            // bottom drawer wood-tone
+    ubox(iw-1, dh, T, mat, 0, y, UD/2 - 0.2);    // front face proud of carcass
+  }
+}
+
+// render a few frames then flag done
+let f=0;
+(function loop(){ renderer.render(scene,cam); if(++f<4) requestAnimationFrame(loop); else window.__done=true; })();
+</script>
+</body>
+</html>
